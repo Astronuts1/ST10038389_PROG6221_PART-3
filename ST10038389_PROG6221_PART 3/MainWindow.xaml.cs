@@ -7,6 +7,8 @@ using System.Windows.Media;
 
 namespace ST10038389_PROG6221_PART_3
 {
+    //MainWindow of the recipe application.
+    //Added if and else statements to check if data is true or false.
     public partial class MainWindow : Window
     {
         //All Methods of code in this MainWindow.
