@@ -1,0 +1,114 @@
+﻿<Window x:Class="ST10038389_PROG6221_PART_3.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Recipe Application" Height="600" Width="800"
+        Background="LightBlue">
+    <!-- Background color changed from white to lightBlue for user engagment. -->
+    <Grid>
+        <StackPanel HorizontalAlignment="Center">
+
+            <!-- Main Menu Buttons -->
+            <Label Content="Welcome to the Recipe Application Menu" FontSize="18" FontWeight="Bold" Foreground="Black"/>
+            <!-- Welcome message to application -->
+            <StackPanel Margin="10">
+                <!-- 5 Different Menu buttons and their actions -->
+                <Button Content="Add Recipe" Click="AddRecipe_Click" Width="200" Height="30" Background="Pink" Foreground="Black" Margin="0,10,0,5"/>
+                <Button Content="Display All Recipes" Click="DisplayRecipes_Click" Margin="0,5,0,5" Width="200" Height="30" Background="Pink" Foreground="Black"/>
+                <Button Content="Scale Recipe" Click="ScaleRecipe_Click" Width="200" Height="30" Background="Pink" Foreground="Black"/>
+                <Button Content="Delete All Recipes" Click="ClearRecipes_Click" Margin="0,5,0,5" Width="200" Height="30" Background="Pink" Foreground="Black"/>
+                <Button Content="Close Application" Click="CloseApplication_Click" Width="200" Height="30" Background="Pink" Foreground="Black" Margin="0,5,0,5"/>
+                <Button Content="Return to Main Menu" Click="ReturnToMainMenu_Click" Width="200" Height="30" Background="Pink" Foreground="Black" Margin="0,5,0,10"/>
+                <!-- The Return to Main Menu button,works as if when the user  is done with the details, he can click it and takes him back to the main menu section. -->
+                <!-- Set the background of the buttons to pink.-->
+                <!-- Set the TextColor to black -->
+            </StackPanel>
+
+            <!-- Add Recipe Layout -->
+            <StackPanel Visibility="Collapsed" x:Name="AddRecipePanel" Margin="10">
+                <Label Content="Add Recipe" FontSize="16" FontWeight="Bold" Foreground="Black" Margin="5"/>
+               
+                <StackPanel Margin="5">
+                    <StackPanel Orientation="Horizontal" Margin="0 5">
+                        <!-- User enters recipe Name -->
+                        <Label Content="Recipe Name:" FontWeight="Bold" Foreground="Black" Width="100"/>
+                        <TextBox x:Name="RecipeNameTextBox" Text="Enter Recipe Name" Foreground="Gray" Width="300" Height="30" GotFocus="RemoveText" LostFocus="AddText"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="0 5">
+                        <!-- User enters names of the Ingredients -->
+                        <Label Content="Ingredient Name:" FontWeight="Bold" Foreground="Black" Width="100"/>
+                        <TextBox x:Name="IngredientNameTextBox" Text="Enter Ingredient Name" Foreground="Gray" Width="300" Height="30" GotFocus="RemoveText" LostFocus="AddText"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="0 5">
+                        <!-- User enters the amount of items/quantity needed -->
+                        <Label Content="Quantity:" FontWeight="Bold" Foreground="Black" Width="100"/>
+                        <TextBox x:Name="IngredientQuantityTextBox" Text="Enter Quantity" Foreground="Gray" Width="100" Height="30" GotFocus="RemoveText" LostFocus="AddText"/>
+                        <!-- User enters the type or unit of measurement used for the recipe -->
+                        <Label Content="Unit of Measurement:" FontWeight="Bold" Foreground="Black" Width="150" Margin="10,0,0,0"/>
+                        <TextBox x:Name="IngredientUnitTextBox" Text="Enter Unit of Measurement" Foreground="Gray" Width="150" Height="30" GotFocus="RemoveText" LostFocus="AddText"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="0 5">
+                        <!-- User enters the amount of calories taken-->
+                        <Label Content="Calories:" FontWeight="Bold" Foreground="Black" Width="100"/>
+                        <TextBox x:Name="IngredientCaloriesTextBox" Text="Enter Calories" Foreground="Gray" Width="100" Height="30" GotFocus="RemoveText" LostFocus="AddText"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="0 5">
+                        <!-- User enters/types out the steps taken to make this recipe -->
+                        <Label Content="Recipe Steps:" FontWeight="Bold" Foreground="Black" Width="100"/>
+                        <TextBox x:Name="RecipeStepsTextBox" Text="Enter Recipe Steps" Foreground="Gray" Width="300" Height="100" VerticalScrollBarVisibility="Auto" AcceptsReturn="True" GotFocus="RemoveText" LostFocus="AddText"/>
+                    </StackPanel>
+
+                    <Button Content="Save Recipe" Click="SaveRecipe_Click" Width="100" Height="30" Background="Pink" Foreground="Black" Margin="0 10"/>
+                    <!-- After user clicks this button "Save Recipe". -->
+                    <!-- It saves the data of that recipe and then displays it in a message box on the display all recipes button once clicked -->
+                </StackPanel>
+            </StackPanel>
+
+            <!-- Scale Recipe -->
+            <!-- Scaling recipe by either (1),(1.5),(2),(2.5),(3) -->
+            <!-- This button scales the recipe by a particular scaling factor choice of user inputs -->
+            <!-- Calculates the scale and displays the data on the display all recipes button box. -->
+            <StackPanel Visibility="Collapsed" x:Name="ScaleRecipePanel" Margin="10">
+                <Label Content="Scale Recipe" FontSize="16" FontWeight="Bold" Foreground="Black" Margin="5"/>
+
+                <StackPanel Margin="5">
+                    <Label Content="Select Scale Factor:" FontWeight="Bold" Foreground="Black" Margin="0 5"/>
+                    <StackPanel Orientation="Horizontal">
+                        <RadioButton x:Name="Scale1_5" Content="1.5x" Foreground="Black"/>
+                        <RadioButton x:Name="Scale2_0" Content="2.0x" Foreground="Black" Margin="10 0"/>
+                        <RadioButton x:Name="Scale3_0" Content="3.0x" Foreground="Black" Margin="10 0"/>
+                    </StackPanel>
+                    <Button Content="Apply Scale" Click="ApplyScale_Click" Width="100" Height="30" Background="Pink" Foreground="Black" Margin="0 10"/>
+                </StackPanel>
+            </StackPanel>
+
+            <!-- Recipe List Box -->
+            <!-- Message box for displaying information. -->
+            <ListBox x:Name="RecipeListBox" SelectionMode="Single" Visibility="Collapsed" SelectionChanged="RecipeListBox_SelectionChanged" Margin="10">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding RecipeName}" />
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
+            <!-- Summary of code -->
+            <!-- Filter Panel -->
+            <!-- The Filter includes an input field for the user to enter the Ingredient Name. -->
+            <!-- Once the User enters the Ingredient Name, user can then click the button filter. -->
+            <!-- The button filter then operates and spits out the message of recipe details filtered! -->
+            <StackPanel x:Name="FilterPanel" Margin="10">
+                <Label Content="Filter by Ingredient Name" FontSize="16" FontWeight="Bold" Foreground="Black" Margin="5"/>
+                <StackPanel Orientation="Horizontal" Margin="0 5">
+                    <TextBox x:Name="FilterIngredientTextBox" Text="Enter Ingredient Name" Foreground="Gray" Width="300" Height="30" GotFocus="RemoveText" LostFocus="AddText"/>
+                    <Button Content="Filter" Click="FilterRecipes_Click" Width="100" Height="30" Background="Pink" Foreground="Black" Margin="10 0"/>
+                </StackPanel>
+            </StackPanel>
+
+        </StackPanel>
+    </Grid>
+</Window>
+<!-- End of File-->
