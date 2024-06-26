@@ -8,7 +8,7 @@ namespace ST10038389_PROG6221_PART_3
         //Getters and Setters for RecipeName, IngredientName, Quantity, Unit of Measurement, Calories and RecipeSteps.
         //</Summary>
 
-        //Properties for the Recipes Name, Ingredient Name and so on.
+        //Properties for the Recipes Name, Ingredient Name, Quantity, Unit of Measurement, Calories and Recipe Steps taken.
         public string RecipeName { get; set; }
         public string IngredientName { get; set; }
         public double Quantity { get; set; }
